@@ -4,8 +4,8 @@
 
 Launch the following command.
 
-```sh
-$ npm install
+ ```sh
+ $ mvn install
 ```
 
 Create your credentials file at ~/.aws/credentials (C:\Users\USER_NAME\\.aws\credentials for Windows users) and save the following lines after replacing the values with your own.
@@ -18,10 +18,13 @@ aws_secret_access_key = YOUR_SECRET_ACCESS_KEY
 
 ## Run
 
-Launch the following command.
+Launch the following commands.
 
 ```sh
-$ npm run
-```
+ $ cd backend
+ $ mvn spring-boot:run
+ ```
 
-Open [http://localhost:3000](http://localhost:3000) to view application in the browser.
+Your app should be up and running on port 8080. 
+ 
+ Open http://127.0.0.1:8080 in your browser and you should see basic Hello World message.
