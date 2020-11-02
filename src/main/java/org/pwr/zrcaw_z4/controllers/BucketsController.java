@@ -1,11 +1,10 @@
 package org.pwr.zrcaw_z4.controllers;
 
-import org.pwr.zrcaw_z4.BucketsService;
+import org.pwr.zrcaw_z4.services.BucketsService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.pwr.zrcaw_z4.dtos.BucketDTO;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
