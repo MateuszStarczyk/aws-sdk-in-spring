@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<body>
+<header class="mb-5" th:fragment="header">
+    <nav class="navbar fixed-top static-top navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand text-white">AWS Webapp</a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" >Bucket<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" >DynamoDB<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Comprehend
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/detectLanguage">Detect language</a>
+                        <a class="dropdown-item" href="/detectSyntax">Detect syntax</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+</body>
+</html>

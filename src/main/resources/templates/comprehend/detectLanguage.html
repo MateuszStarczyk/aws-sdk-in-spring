@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"></head>
+<header th:replace="fragments/header :: header"></header>
+<body>
+<main role="main" class="container">
+
+    <div class="jumbotron">
+        <h2>Comprehend - Detect language</h2>
+        <hr class="my-4">
+        <form th:action="@{/detectLanguage}" method="get" class="my-2 my-lg-2">
+            <div class="form-group">
+                <label for="input_text">Input some text here</label>
+                <textarea class="form-control" id="input_text" rows="4" name="input_text"></textarea>
+            </div>
+            <button class="btn btn-dark my-2 my-sm-0" type="submit">Detect language</button>
+        </form>
+        <div th:if="${!resultText.isEmpty()}">
+            <br>
+            <h5 class="text-left">Input text:</h5>
+            <p class="text-left" th:text="${inputText}">Input</p>
+            <h5 th:if="${!resultText.isEmpty()}">
+                <a class="text-left" >Detected language:</a>
+                <a class="text-left" th:text="${resultText}">Result</a>
+            </h5>
+        </div>
+    </div>
+
+</main>
+</body>
+</html>
