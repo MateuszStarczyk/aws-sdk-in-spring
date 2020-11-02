@@ -1,4 +1,4 @@
-package org.pwr.zrcaw_z4;
+package org.pwr.zrcaw_z4.temp;
 
 
 import software.amazon.awssdk.core.waiters.WaiterResponse;

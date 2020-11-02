@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"></head>
+<header th:replace="fragments/header :: header"></header>
+<body>
+<main role="main" class="container">
+
+    <div class="jumbotron">
+        <h2>Comprehend - Detect syntax</h2>
+        <hr class="my-4">
+        <form th:action="@{/detectSyntax}" method="get" class="my-2 my-lg-2">
+            <div class="form-group">
+                <label for="input_text">Input some text here</label>
+                <textarea class="form-control" id="input_text" rows="4" name="input_text"></textarea>
+            </div>
+            <button class="btn btn-dark my-2 my-sm-0" type="submit">Detect syntax</button>
+        </form>
+        <br>
+        <h5>Syntax:</h5>
+        <ul>
+            <li class="text-secondary">Noun</li>
+            <li class="text-success">Verb</li>
+            <li class="text-primary">Pronoun</li>
+            <li class="text-warning">Adverb</li>
+            <li class="text-danger">Conjunction</li>
+            <li class="text-info">Number</li>
+            <li>Normal</li>
+        </ul>
+        <br>
+        <div th:if="${tokens.size() > 0}">
+            <h5 class="text-left">Result text:</h5>
+            <a th:each="token : ${tokens}">
+                <a th:switch="${token.partOfSpeech().tagAsString()}">
+                    <a th:case="'NOUN'" class="text-secondary" th:text="${token.text()}">text</a>
+                    <a th:case="'VERB'" class="text-success" th:text="${token.text()}">text</a>
+                    <a th:case="'CONJ'" class="text-danger" th:text="${token.text()}">text</a>
+                    <a th:case="'PRON'" class="text-primary" th:text="${token.text()}">text</a>
+                    <a th:case="'ADV'" class="text-warning" th:text="${token.text()}">text</a>
+                    <a th:case="'NUM'" class="text-info" th:text="${token.text()}">text</a>
+                    <a th:case="*" th:text="${token.text()}">text</a>
+                </a>
+                <a> </a>
+            </a>
+        </div>
+    </div>
+
+</main>
+</body>
+</html>
