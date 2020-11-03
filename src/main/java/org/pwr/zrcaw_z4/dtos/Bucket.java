@@ -8,7 +8,7 @@ import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
-public class BucketDTO {
+public class Bucket {
 
     @JsonProperty("name")
     @Setter @Getter private String name;

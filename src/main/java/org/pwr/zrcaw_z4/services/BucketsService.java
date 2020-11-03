@@ -1,13 +1,13 @@
 package org.pwr.zrcaw_z4.services;
 
+import org.pwr.zrcaw_z4.dtos.Bucket;
+import org.pwr.zrcaw_z4.models.BucketFile;
 import org.springframework.stereotype.Component;
 import software.amazon.awssdk.core.ResponseBytes;
-import software.amazon.awssdk.core.exception.SdkException;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.*;
-import org.pwr.zrcaw_z4.models.BucketItem;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -18,10 +18,7 @@ import java.util.stream.Collectors;
 @Component
 public class BucketsService {
 
-    S3Client s3;
-
     private S3Client getClient() {
-        // Create the S3Client object
         Region region = Region.US_EAST_1;
 
         return S3Client.builder()
@@ -30,19 +27,14 @@ public class BucketsService {
     }
 
     public byte[] getObjectBytes(String bucketName, String keyName) {
-
-        s3 = getClient();
-
         try {
-            // create a GetObjectRequest instance
             GetObjectRequest objectRequest = GetObjectRequest
                     .builder()
                     .key(keyName)
                     .bucket(bucketName)
                     .build();
 
-            // get the byte[] from this AWS S3 object
-            ResponseBytes<GetObjectResponse> objectBytes = s3.getObjectAsBytes(objectRequest);
+            ResponseBytes<GetObjectResponse> objectBytes = getClient().getObjectAsBytes(objectRequest);
             byte[] data = objectBytes.asByteArray();
             return data;
 
@@ -53,15 +45,13 @@ public class BucketsService {
         return null;
     }
 
-    public List<BucketItem> getAllFiles(String bucketName) {
-
-        s3 = getClient();
+    public List<BucketFile> getAllFiles(String bucketName) {
         long sizeLg;
         Instant DateIn;
-        BucketItem myItem;
+        BucketFile myItem;
 
 
-        List bucketItems = new ArrayList<BucketItem>();
+        List bucketItems = new ArrayList<BucketFile>();
 
         try {
             ListObjectsRequest listObjects = ListObjectsRequest
@@ -69,12 +59,12 @@ public class BucketsService {
                     .bucket(bucketName)
                     .build();
 
-            ListObjectsResponse res = s3.listObjects(listObjects);
+            ListObjectsResponse res = getClient().listObjects(listObjects);
             List<S3Object> objects = res.contents();
 
             for (ListIterator iterVals = objects.listIterator(); iterVals.hasNext(); ) {
                 S3Object myValue = (S3Object) iterVals.next();
-                myItem = new BucketItem();
+                myItem = new BucketFile();
                 myItem.setKey(myValue.key());
                 myItem.setOwner(myValue.owner().displayName());
                 sizeLg = myValue.size() / 1024;
@@ -82,7 +72,6 @@ public class BucketsService {
                 DateIn = myValue.lastModified();
                 myItem.setDate(String.valueOf(DateIn));
 
-                // Push the items to the list
                 bucketItems.add(myItem);
             }
 
@@ -92,53 +81,27 @@ public class BucketsService {
         }
     }
 
-    public String putFile(byte[] data, String bucketName, String objectKey) {
-
-        s3 = getClient();
-
-        try {
-            //Put a file into the bucket
-            PutObjectResponse response = s3.putObject(PutObjectRequest.builder()
-                            .bucket(bucketName)
-                            .key(objectKey)
-                            .build(),
-                    RequestBody.fromBytes(data));
-
-            return response.eTag();
-
-        } catch (S3Exception e) {
-            System.err.println(e.getMessage());
-            System.exit(1);
-        }
-        return "";
+    public void putFile(byte[] data, String bucketName, String objectKey) {
+        getClient().putObject(PutObjectRequest.builder()
+                        .bucket(bucketName)
+                        .key(objectKey)
+                        .build(),
+                RequestBody.fromBytes(data));
     }
 
-    public List<String> getAllBucketsNames() {
-
-        s3 = getClient();
-
-        return s3.listBuckets().buckets().stream().map(Bucket::name).collect(Collectors.toList());
+    public void deleteFile(String bucketName, String filename) {
+        getClient().deleteObject(DeleteObjectRequest.builder().bucket(bucketName).key(filename).build());
     }
 
-    public Boolean addBucket(String name) {
-        s3 = getClient();
-        try {
-            s3.createBucket(CreateBucketRequest.builder().bucket(name).build());
-            return true;
-        } catch (SdkException e) {
-            e.printStackTrace();
-        }
-        return false;
+    public List<Bucket> getBuckets() {
+        return getClient().listBuckets().buckets().stream().map(b -> new Bucket(b.name())).collect(Collectors.toList());
     }
 
-    public Boolean deleteBucket(String name) {
-        s3 = getClient();
-        try {
-            s3.deleteBucket(DeleteBucketRequest.builder().bucket(name).build());
-            return true;
-        } catch (SdkException e) {
-            e.printStackTrace();
-        }
-        return false;
+    public void saveBucket(Bucket bucket) {
+        getClient().createBucket(CreateBucketRequest.builder().bucket(bucket.getName()).build());
+    }
+
+    public void deleteBucket(String name) {
+        getClient().deleteBucket(DeleteBucketRequest.builder().bucket(name).build());
     }
 }
