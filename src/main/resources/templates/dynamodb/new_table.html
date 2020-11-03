@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"></head>
+<header th:replace="fragments/header :: header"></header>
+<body>
+<main role="main" class="container">
+    <br/>
+    <div th:if="${errorMessage}">
+        <div class="alert alert-danger" th:text="${errorMessage}" role="alert">
+            This is a danger alert—check it out!
+        </div>
+    </div>
+    <br/>
+    <h1> Create a table </h1>
+
+
+    <form action="/dynamodb/tables/" th:object="${table}" method="post">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input th:field="${table.name}" type="text" class="form-control" id="name">
+        </div>
+        <div class="form-group">
+            <label for="key">Key</label>
+            <input th:field="${table.key}" type="text" class="form-control" id="key">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+</main>
+</body>
+</html>

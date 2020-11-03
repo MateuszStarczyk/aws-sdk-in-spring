@@ -7,6 +7,7 @@ import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbParti
 public class Note {
     private String text;
     private String title;
+    private int priority;
     private String uuid;
 
     public String getText() {
@@ -34,5 +35,11 @@ public class Note {
         this.uuid = uuid;
     }
 
+    public int getPriority() {
+        return priority;
+    }
 
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
 }
