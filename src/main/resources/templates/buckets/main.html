@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head"></head>
+<header th:replace="fragments/header :: header"></header>
+<body>
+<main role="main" class="container">
+
+    <div class="jumbotron">
+        <h2>Buckets management</h2>
+        <hr class="my-4">
+        <div th:if="${errorMessage}">
+            <br/>
+            <div class="alert alert-danger" th:text="${errorMessage}" role="alert">
+                This is a danger alert—check it out!
+            </div>
+            <br/>
+        </div>
+        <form th:action="@{'/buckets'}" th:object="${bucket}" method="post">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input th:field="${bucket.name}" type="text" class="form-control" id="name">
+            </div>
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+        <br/>
+        <div th:if="${buckets.isEmpty()}">
+            <h3>No buckets available</h3>
+        </div>
+        <div th:if="${!buckets.isEmpty()}">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Files</th>
+                    <th>Remove</th>
+                </tr>
+                </thead>
+                <tbody>
+                <th:block th:each="b : ${buckets}" scope="col">
+                    <tr>
+                        <td th:text="${b.name}">Name</td>
+                        <td>
+                            <a th:href="${'/buckets/' + b.name + '/files'}">
+                                <button type="button" class="btn btn-primary">
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-files" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M4 2h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H4z"/>
+                                        <path d="M6 0h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2v-1a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H6a1 1 0 0 0-1 1H4a2 2 0 0 1 2-2z"/>
+                                    </svg>
+                                </button>
+                            </a>
+                        </td>
+                        <td>
+                            <a th:href="${'/buckets/' + b.name + '/delete'}">
+                                <button type="button" class="btn btn-warning">
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill"
+                                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                              d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
+                                    </svg>
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                </th:block>
+            </table>
+        </div>
+
+    </div>
+
+</main>
+</body>
+</html>

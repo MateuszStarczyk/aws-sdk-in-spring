@@ -1,5 +1,5 @@
 package org.pwr.zrcaw_z4.models;
-public class BucketItem {
+public class BucketFile {
 
     private String key;
     private String owner;
