@@ -1,14 +1,18 @@
 package org.pwr.zrcaw_z4.services;
 
+import org.pwr.zrcaw_z4.dtos.Table;
 import org.pwr.zrcaw_z4.exceptions.ElementAlreadyExistsException;
+import org.springframework.stereotype.Service;
 import software.amazon.awssdk.core.waiters.WaiterResponse;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.model.*;
 import software.amazon.awssdk.services.dynamodb.waiters.DynamoDbWaiter;
 
+import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class TablesService {
     private Region region = Region.US_EAST_1;
     private DynamoDbClient ddb = DynamoDbClient.builder().region(region).build();
@@ -21,6 +25,20 @@ public class TablesService {
         ListTablesRequest request = ListTablesRequest.builder().build();
         ListTablesResponse response = ddb.listTables(request);
         return response.tableNames();
+    }
+
+    public List<Table> getAllTables() {
+        List<Table> tables = new ArrayList<>();
+        List<String> allTableNames = getAllTableNames();
+
+        for (String tableName : allTableNames) {
+            DescribeTableRequest request = DescribeTableRequest.builder().tableName(tableName).build();
+            TableDescription tableInfo = ddb.describeTable(request).table();
+
+            Table table = new Table(tableInfo.tableName(), tableInfo.tableSizeBytes(), tableInfo.creationDateTime());
+            tables.add(table);
+        }
+        return tables;
     }
 
     public void createTable(String tableName, String key) {

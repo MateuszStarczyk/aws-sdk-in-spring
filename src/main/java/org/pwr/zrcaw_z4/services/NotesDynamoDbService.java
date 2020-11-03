@@ -2,6 +2,7 @@ package org.pwr.zrcaw_z4.services;
 
 import org.pwr.zrcaw_z4.exceptions.ElementNotFoundException;
 import org.pwr.zrcaw_z4.models.Note;
+import org.springframework.stereotype.Service;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedClient;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbTable;
 import software.amazon.awssdk.enhanced.dynamodb.Key;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@Service
 public class NotesDynamoDbService implements NotesService {
     private Region region = Region.US_EAST_1;
     private DynamoDbClient ddb = DynamoDbClient.builder().region(region).build();
