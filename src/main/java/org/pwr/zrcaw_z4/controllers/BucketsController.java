@@ -1,7 +1,6 @@
 package org.pwr.zrcaw_z4.controllers;
 
 import org.pwr.zrcaw_z4.dtos.Bucket;
-import org.pwr.zrcaw_z4.models.BucketFile;
 import org.pwr.zrcaw_z4.services.BucketsService;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
@@ -12,11 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import software.amazon.awssdk.core.exception.SdkException;
 import software.amazon.awssdk.services.s3.model.BucketAlreadyExistsException;
 import software.amazon.awssdk.services.s3.model.S3Exception;
-
-import java.io.IOException;
 
 @Controller
 public class BucketsController {
@@ -38,7 +34,7 @@ public class BucketsController {
     public String getFilesForBucket(@PathVariable String id, Model model) {
         model.addAttribute("bucket_name", id);
         model.addAttribute("files", bucketsService.getAllFiles(id));
-        return "buckets/bucket_files";
+        return "/buckets/bucketFiles";
     }
 
     @PostMapping("/buckets/{id}/files")
@@ -49,7 +45,7 @@ public class BucketsController {
         }
         try {
             bucketsService.putFile(file.getBytes(), id, file.getOriginalFilename());
-        } catch (SdkException | IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             redirectAttributes.addFlashAttribute("errorMessage", "File upload error!");
         }
@@ -68,7 +64,7 @@ public class BucketsController {
     public String deleteFile(@PathVariable String id, @PathVariable String filename, RedirectAttributes redirectAttributes) {
         try {
             bucketsService.deleteFile(id, filename);
-        } catch (SdkException e) {
+        } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "File deletion error");
         }
         return "redirect:/buckets/" + id + "/files";
@@ -77,12 +73,14 @@ public class BucketsController {
     @PostMapping("/buckets")
     public String createBucket(@ModelAttribute("bucket") Bucket bucket, RedirectAttributes redirectAttributes) {
         try {
-            bucketsService.saveBucket(bucket); //Bucket name should be between 3 and 63 characters long
+            bucketsService.saveBucket(bucket);
+        }  catch (BucketAlreadyExistsException e) {
+            e.printStackTrace();
+            redirectAttributes.addFlashAttribute("errorMessage", "The requested bucket name is not available. The bucket namespace is shared by all users of the system.");
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
             redirectAttributes.addFlashAttribute("errorMessage", "Bucket name should be between 3 and 63 characters long!");
-        } catch (BucketAlreadyExistsException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "The requested bucket name is not available. The bucket namespace is shared by all users of the system.");
         }
         return "redirect:/buckets";
@@ -95,7 +93,7 @@ public class BucketsController {
         } catch (S3Exception e) {
             e.printStackTrace();
             redirectAttributes.addFlashAttribute("errorMessage", " The bucket you tried to delete is not empty!");
-        } catch (SdkException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             redirectAttributes.addFlashAttribute("errorMessage", "Bucket deletion error!");
         }
