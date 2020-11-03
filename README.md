@@ -1,4 +1,11 @@
-# Zastosowanie rozwiązań chmurowych w aplikacjach webowych
+# Spring Boot application with AWS SDK
+
+## Info
+
+In app have been used AWS Services:
+- [S3](https://aws.amazon.com/s3/?nc2=h_ql_prod_fs_s3)
+- [DynamoDB](https://aws.amazon.com/dynamodb/?nc2=h_ql_prod_fs_ddb)
+- [Comprehend](https://aws.amazon.com/comprehend/?nc2=h_ql_prod_ml_comp)
 
 ## Prepare
 
@@ -21,10 +28,9 @@ aws_secret_access_key = YOUR_SECRET_ACCESS_KEY
 Launch the following commands.
 
 ```sh
- $ cd backend
  $ mvn spring-boot:run
  ```
 
 Your app should be up and running on port 8080. 
  
- Open http://127.0.0.1:8080 in your browser and you should see basic Hello World message.
+ Open http://127.0.0.1:8080 in your browser and you should see Home Page.
