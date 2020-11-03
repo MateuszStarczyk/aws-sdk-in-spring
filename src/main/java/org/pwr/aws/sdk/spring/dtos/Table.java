@@ -1,4 +1,4 @@
-package org.pwr.zrcaw_z4.dtos;
+package org.pwr.aws.sdk.spring.dtos;
 
 import java.time.Instant;
 import java.time.ZoneId;

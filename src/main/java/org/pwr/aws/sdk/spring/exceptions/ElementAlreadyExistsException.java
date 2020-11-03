@@ -1,4 +1,4 @@
-package org.pwr.zrcaw_z4.exceptions;
+package org.pwr.aws.sdk.spring.exceptions;
 
 public class ElementAlreadyExistsException extends RuntimeException {
 }

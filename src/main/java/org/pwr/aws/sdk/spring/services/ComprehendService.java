@@ -1,4 +1,4 @@
-package org.pwr.zrcaw_z4.services;
+package org.pwr.aws.sdk.spring.services;
 
 import org.springframework.stereotype.Service;
 import software.amazon.awssdk.regions.Region;

@@ -1,7 +1,7 @@
-package org.pwr.zrcaw_z4.services;
+package org.pwr.aws.sdk.spring.services;
 
-import org.pwr.zrcaw_z4.dtos.Bucket;
-import org.pwr.zrcaw_z4.models.BucketFile;
+import org.pwr.aws.sdk.spring.dtos.Bucket;
+import org.pwr.aws.sdk.spring.models.BucketFile;
 import org.springframework.stereotype.Component;
 import software.amazon.awssdk.core.ResponseBytes;
 import software.amazon.awssdk.core.sync.RequestBody;
@@ -93,8 +93,8 @@ public class BucketsService {
         getClient().deleteObject(DeleteObjectRequest.builder().bucket(bucketName).key(filename).build());
     }
 
-    public List<Bucket> getBuckets() {
-        return getClient().listBuckets().buckets().stream().map(b -> new Bucket(b.name())).collect(Collectors.toList());
+    public List<org.pwr.aws.sdk.spring.dtos.Bucket> getBuckets() {
+        return getClient().listBuckets().buckets().stream().map(b -> new org.pwr.aws.sdk.spring.dtos.Bucket(b.name())).collect(Collectors.toList());
     }
 
     public void saveBucket(Bucket bucket) {

@@ -1,4 +1,4 @@
-package org.pwr.zrcaw_z4.models;
+package org.pwr.aws.sdk.spring.models;
 public class BucketFile {
 
     private String key;

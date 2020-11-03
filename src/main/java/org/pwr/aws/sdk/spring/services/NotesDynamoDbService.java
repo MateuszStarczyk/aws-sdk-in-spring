@@ -1,7 +1,7 @@
-package org.pwr.zrcaw_z4.services;
+package org.pwr.aws.sdk.spring.services;
 
-import org.pwr.zrcaw_z4.exceptions.ElementNotFoundException;
-import org.pwr.zrcaw_z4.models.Note;
+import org.pwr.aws.sdk.spring.exceptions.ElementNotFoundException;
+import org.pwr.aws.sdk.spring.models.Note;
 import org.springframework.stereotype.Service;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedClient;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbTable;

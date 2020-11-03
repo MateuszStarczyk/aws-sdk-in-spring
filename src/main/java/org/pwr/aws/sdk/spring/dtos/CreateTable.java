@@ -1,4 +1,4 @@
-package org.pwr.zrcaw_z4.dtos;
+package org.pwr.aws.sdk.spring.dtos;
 
 public class CreateTable {
     private String name;

@@ -1,9 +1,9 @@
-package org.pwr.zrcaw_z4.controllers;
+package org.pwr.aws.sdk.spring.controllers;
 
-import org.pwr.zrcaw_z4.dtos.CreateTable;
-import org.pwr.zrcaw_z4.models.Note;
-import org.pwr.zrcaw_z4.services.NotesDynamoDbService;
-import org.pwr.zrcaw_z4.services.TablesService;
+import org.pwr.aws.sdk.spring.dtos.CreateTable;
+import org.pwr.aws.sdk.spring.models.Note;
+import org.pwr.aws.sdk.spring.services.NotesDynamoDbService;
+import org.pwr.aws.sdk.spring.services.TablesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,6 +1,6 @@
-package org.pwr.zrcaw_z4;
+package org.pwr.aws.sdk.spring;
 
-import org.pwr.zrcaw_z4.services.TablesService;
+import org.pwr.aws.sdk.spring.services.TablesService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -23,5 +23,4 @@ public class Application {
             tablesService.createTable(tableName, key);
         }
     }
-
 }

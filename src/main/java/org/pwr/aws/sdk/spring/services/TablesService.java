@@ -1,7 +1,7 @@
-package org.pwr.zrcaw_z4.services;
+package org.pwr.aws.sdk.spring.services;
 
-import org.pwr.zrcaw_z4.dtos.Table;
-import org.pwr.zrcaw_z4.exceptions.ElementAlreadyExistsException;
+import org.pwr.aws.sdk.spring.dtos.Table;
+import org.pwr.aws.sdk.spring.exceptions.ElementAlreadyExistsException;
 import org.springframework.stereotype.Service;
 import software.amazon.awssdk.core.waiters.WaiterResponse;
 import software.amazon.awssdk.regions.Region;

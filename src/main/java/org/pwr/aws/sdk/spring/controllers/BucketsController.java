@@ -1,7 +1,7 @@
-package org.pwr.zrcaw_z4.controllers;
+package org.pwr.aws.sdk.spring.controllers;
 
-import org.pwr.zrcaw_z4.dtos.Bucket;
-import org.pwr.zrcaw_z4.services.BucketsService;
+import org.pwr.aws.sdk.spring.dtos.Bucket;
+import org.pwr.aws.sdk.spring.services.BucketsService;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;

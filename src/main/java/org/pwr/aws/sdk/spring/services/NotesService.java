@@ -1,6 +1,6 @@
-package org.pwr.zrcaw_z4.services;
+package org.pwr.aws.sdk.spring.services;
 
-import org.pwr.zrcaw_z4.models.Note;
+import org.pwr.aws.sdk.spring.models.Note;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package org.pwr.zrcaw_z4.controllers;
+package org.pwr.aws.sdk.spring.controllers;
 
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;

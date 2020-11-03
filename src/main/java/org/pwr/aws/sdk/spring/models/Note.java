@@ -1,4 +1,4 @@
-package org.pwr.zrcaw_z4.models;
+package org.pwr.aws.sdk.spring.models;
 
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbPartitionKey;

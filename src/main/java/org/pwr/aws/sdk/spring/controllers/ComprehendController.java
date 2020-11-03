@@ -1,6 +1,6 @@
-package org.pwr.zrcaw_z4.controllers;
+package org.pwr.aws.sdk.spring.controllers;
 
-import org.pwr.zrcaw_z4.services.ComprehendService;
+import org.pwr.aws.sdk.spring.services.ComprehendService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
