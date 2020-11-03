@@ -33,15 +33,30 @@ Launch the following commands.
 
 Your app should be up and running on port 8080. 
  
- Open http://127.0.0.1:8080 in your browser and you should see Home Page.
+Open http://127.0.0.1:8080 in your browser and you should see Home Page.
  
 ## Screenshots
 
 ### S3
-![S3](screenshots/s3.png)
+
+#### Buckets management
+![S3](screenshots/s3_buckets.png)
+
+#### Files management
+![S3](screenshots/s3_files.png)
 
 ### DynamoDB
+
+#### Tables with notes
 ![S3](screenshots/dynamo_db.png)
 
-### S3
-![S3](screenshots/comprehend.png)
+#### Add note
+![S3](screenshots/notes.png)
+
+### Comprehend
+
+#### Syntax detection
+![S3](screenshots/comprehend_syntax.png)
+
+#### Language detection
+![S3](screenshots/comprehend_language.png)
